@@ -1,0 +1,16 @@
+{
+  "name": "greetings-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord bot with welcome, goodbye, and invite tracking",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.19.3",
+    "dotenv": "^16.4.7"
+  }
+}
