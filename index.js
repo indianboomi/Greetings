@@ -125,6 +125,19 @@ client.on("guildMemberAdd", async member => {
       inviter = usedInvite.inviter;
       inviterCounts[inviter.id] = getInviteCount(inviter.id) + 1;
       saveCounts();
+
+      // Optional dedicated invite-log channel.
+      if (process.env.INVITE_LOG_CHANNEL_ID) {
+        const logChannel = await member.guild.channels
+          .fetch(process.env.INVITE_LOG_CHANNEL_ID)
+          .catch(() => null);
+
+        if (logChannel && logChannel.isTextBased()) {
+          await logChannel.send({
+            content: `📨 ${member} joined using an invite from **${inviter.tag}**. They now have **${getInviteCount(inviter.id)}** tracked invite(s).`
+          }).catch(console.error);
+        }
+      }
     }
 
     inviteCache.set(
